@@ -6,11 +6,10 @@ LABEL author="Diego Alvarez (dialvarezs@gmail.com)"
 LABEL description="dRep (https://github.com/MrOlm/drep) and dependencies"
 LABEL org.opencontainers.image.source https://github.com/dialvarezs/containers
 
-SHELL ["/bin/bash", "-c"] 
-
 USER root
+
 RUN apt-get update && apt-get upgrade -y && \
-    apt-get install -y wget procps && \
+    apt-get install -y procps && \
     rm -fr /var/lib/apt/lists/*
 
 # install dRep dependencies
@@ -20,10 +19,8 @@ RUN micromamba install -y -f /tmp/env.yaml && \
     micromamba clean -aqy
 
 # install dRep
-USER root
 COPY requirements.txt /tmp/requirements.txt
 RUN /opt/conda/bin/pip install --no-cache-dir -r /tmp/requirements.txt
-
 
 ENV PATH=/opt/conda/bin/:$PATH
 
