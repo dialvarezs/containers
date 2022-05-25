@@ -1,0 +1,19 @@
+name: csvkit to GitHub Container Registry
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "csvkit/*"
+  workflow_dispatch:
+
+jobs:
+  call-workflow-passing-data:
+    uses: ./.github/workflows/reusable_publish_py.yml
+    with:
+      package_name: csvkit
+      registry: ghcr.io
+      image: ${{ github.repository }}/csvkit
+      directory: ./csvkit/
+    secrets:
+      GH_TOKEN: ${{ secrets.GH_TOKEN }}
