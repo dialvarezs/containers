@@ -1,0 +1,19 @@
+name: csvkit to GitHub Container Registry
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "sklearn_joblib/*"
+  workflow_dispatch:
+
+jobs:
+  call-workflow-passing-data:
+    uses: ./.github/workflows/reusable_publish_pypkg.yml
+    with:
+      package_name: sklearn-joblib
+      registry: ghcr.io
+      image: ${{ github.repository }}/sklearn-joblib
+      directory: ./sklearn-joblib/
+    secrets:
+      GH_TOKEN: ${{ secrets.GH_TOKEN }}
