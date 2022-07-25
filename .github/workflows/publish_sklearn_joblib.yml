@@ -1,4 +1,4 @@
-name: csvkit to GitHub Container Registry
+name: scikit-learn, joblib and pandas to GitHub Container Registry
 
 on:
   push:
