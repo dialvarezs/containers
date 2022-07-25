@@ -42,7 +42,8 @@ jobs:
         id: getversion
         run: |
           PACKAGE=${{ inputs.package_name }}
-          VERSION=$(cat ./${PACKAGE}/requirements.txt | grep -Po "(?<=${PACKAGE}==)[0-9.]+")
+          DIRECTORY=${{ inputs.directory }}
+          VERSION=$(cat ./${DIRECTORY}/requirements.txt | grep -Po "(?<=${PACKAGE}==)[0-9.]+")
           echo "::set-output name=version::$VERSION"
 
       - name: Build and push
