@@ -3,7 +3,7 @@ FROM python:3.10-slim
 ARG DEBIAN_FRONTEND="noninteractive"
 
 LABEL author="Diego Alvarez (dialvarezs@gmail.com)"
-LABEL description="scikit-learn (https://scikit-learn.org) plus joblib (https://joblib.readthedocs.io/en/latest/)"
+LABEL description="scikit-learn, joblib and pandas"
 LABEL org.opencontainers.image.source https://github.com/dialvarezs/containers
 
 
