@@ -11,7 +11,7 @@ jobs:
   call-workflow-passing-data:
     uses: ./.github/workflows/reusable_publish_pypkg.yml
     with:
-      package_name: sklearn-joblib
+      package_name: scikit-learn
       registry: ghcr.io
       image: ${{ github.repository }}/sklearn-joblib
       directory: ./sklearn-joblib/
