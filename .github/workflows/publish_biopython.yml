@@ -1,0 +1,19 @@
+name: biopython to GitHub Container Registry
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "biopython/*"
+  workflow_dispatch:
+
+jobs:
+  call-workflow-passing-data:
+    uses: ./.github/workflows/reusable_publish_pypkg.yml
+    with:
+      package_name: biopython
+      registry: ghcr.io
+      image: ${{ github.repository }}/biopython
+      directory: ./biopython/
+    secrets:
+      GH_TOKEN: ${{ secrets.GH_TOKEN }}
