@@ -1,0 +1,19 @@
+name: polars to GitHub Container Registry
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "polars/*"
+  workflow_dispatch:
+
+jobs:
+  call-workflow-passing-data:
+    uses: ./.github/workflows/reusable_publish_pypkg.yml
+    with:
+      package_name: polars
+      registry: ghcr.io
+      image: ${{ github.repository }}/polars
+      directory: ./polars/
+    secrets:
+      GH_TOKEN: ${{ secrets.GH_TOKEN }}
