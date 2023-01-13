@@ -1,0 +1,30 @@
+FROM debian:11 as base
+
+ARG DEBIAN_FRONTEND="noninteractive"
+
+LABEL author="Diego Alvarez (dialvarezs@gmail.com)"
+LABEL description="mm2-fast (https://github.com/bwa-mem2/mm2-fast)"
+LABEL org.opencontainers.image.source https://github.com/dialvarezs/containers
+
+
+FROM base as builder
+
+RUN apt-get update && apt-get upgrade -y && \
+    apt-get install -y g++ make git zlib1g-dev && \
+    rm -fr /var/lib/apt/lists/*
+
+WORKDIR /src
+COPY VERSION VERSION
+RUN git clone https://github.com/bwa-mem2/mm2-fast --recurse-submodules --branch mm2-fast-$(cat VERSION)
+RUN make -C mm2-fast
+
+
+FROM base
+
+RUN apt-get update && apt-get upgrade -y && \
+	apt-get install -y procps && \
+	rm -fr /var/lib/apt/lists/*
+
+COPY --from=builder /src/mm2-fast/minimap2 /usr/local/bin/minimap2
+
+RUN minimap2 --version
