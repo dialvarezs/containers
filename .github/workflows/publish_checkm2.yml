@@ -1,4 +1,4 @@
-name: publish checkm2 to GitHub Container Registry
+name: publish CheckM2 to GitHub Container Registry
 
 on:
   push:
