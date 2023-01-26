@@ -1,0 +1,27 @@
+FROM mambaorg/micromamba:latest
+
+ARG DEBIAN_FRONTEND="noninteractive"
+
+LABEL author="Diego Alvarez (dialvarezs@gmail.com)"
+LABEL description="CheckM2 (https://github.com/chklovski/CheckM2)"
+LABEL org.opencontainers.image.source=https://github.com/dialvarezs/containers
+
+USER root
+
+RUN apt-get update && apt-get upgrade -y && \
+    apt-get install -y wget procps && \
+    rm -fr /var/lib/apt/lists/*
+
+COPY VERSION /tmp/VERSION
+
+# clone CheckM2 repository and install deps
+RUN wget https://raw.githubusercontent.com/chklovski/CheckM2/$(cat /tmp/VERSION)/checkm2.yml -O /tmp/checkm2.yml && \
+	# minor fix (temporary?)
+	sed -i 's/, /,/g' /tmp/checkm2.yml && \
+	micromamba install -y -n base -f /tmp/checkm2.yml && \
+	micromamba clean -aqy
+
+# install CheckM2
+RUN /opt/conda/bin/pip install checkm2==$(cat /tmp/VERSION)
+
+ENV PATH=/opt/conda/bin/:$PATH
