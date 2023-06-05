@@ -11,7 +11,7 @@ jobs:
   call-workflow-passing-data:
     uses: ./.github/workflows/reusable_publish_generic.yml
     with:
-      package_name: pigz
+      name: pigz
       registry: ghcr.io
       image: ${{ github.repository }}/pigz
       directory: ./pigz/

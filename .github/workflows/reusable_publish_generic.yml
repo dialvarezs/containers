@@ -3,7 +3,7 @@ name: Reusable Workflow for Publish tools to GitHub Container Registry
 on:
   workflow_call:
     inputs:
-      tool_name:
+      name:
         required: true
         type: string
       registry:
@@ -41,7 +41,7 @@ jobs:
       - name: Get version
         id: getversion
         run: |
-          TOOL=${{ inputs.tool_name }}
+          TOOL=${{ inputs.name }}
           DIRECTORY=${{ inputs.directory }}
           echo "version=$(cat ./${DIRECTORY}/VERSION)" >> $GITHUB_OUTPUT
 
