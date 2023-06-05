@@ -1,0 +1,19 @@
+name: pigz to GitHub Container Registry
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "pigz/*"
+  workflow_dispatch:
+
+jobs:
+  call-workflow-passing-data:
+    uses: ./.github/workflows/reusable_publish_generic.yml
+    with:
+      package_name: pigz
+      registry: ghcr.io
+      image: ${{ github.repository }}/pigz
+      directory: ./pigz/
+    secrets:
+      GH_TOKEN: ${{ secrets.GH_TOKEN }}

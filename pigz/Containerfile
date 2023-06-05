@@ -1,0 +1,29 @@
+FROM debian:11-slim as base
+
+ARG DEBIAN_FRONTEND="noninteractive"
+
+LABEL author="Diego Alvarez (dialvarezs@gmail.com)"
+LABEL description="pigz (https://github.com/madler/pigz)"
+LABEL org.opencontainers.image.source https://github.com/dialvarezs/containers
+
+
+FROM base as builder
+
+RUN apt-get update && apt-get upgrade -y && \
+    apt-get install -y g++ make git zlib1g-dev
+
+WORKDIR /src
+COPY VERSION VERSION
+RUN git clone https://github.com/madler/pigz --branch v$(cat VERSION)
+RUN make -C pigz
+RUN make -C pigz test
+
+
+FROM base
+
+RUN apt-get update && apt-get upgrade -y && \
+	apt-get install -y procps && \
+	rm -fr /var/lib/apt/lists/*
+
+COPY --from=builder /src/pigz/pigz /usr/local/bin/
+RUN ln -f /usr/local/bin/pigz /usr/local/bin/unpigz
