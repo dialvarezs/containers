@@ -1,0 +1,12 @@
+FROM debian:12-slim
+
+ARG DEBIAN_FRONTEND="noninteractive"
+
+LABEL author="Diego Alvarez (dialvarezs@gmail.com)"
+LABEL description="Miscellaneous utilities (git, pigz, curl, wget, aria2, ripgrep)"
+LABEL org.opencontainers.image.source=https://github.com/dialvarezs/containers
+
+
+RUN apt-get update && apt-get upgrade -y && \
+	apt-get install -y procps git pigz curl wget aria2 ripgrep && \
+	rm -fr /var/lib/apt/lists/*
