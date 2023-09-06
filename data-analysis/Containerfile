@@ -1,9 +1,9 @@
-FROM python:3.10-slim
+FROM python:3.11-slim
 
 ARG DEBIAN_FRONTEND="noninteractive"
 
 LABEL author="Diego Alvarez (dialvarezs@gmail.com)"
-LABEL description="scikit-learn, joblib and pandas"
+LABEL description="scikit-learn, jscipy, pandas and joblib"
 LABEL org.opencontainers.image.source https://github.com/dialvarezs/containers
 
 
