@@ -15,7 +15,7 @@ RUN apt-get update && apt-get upgrade -y && \
 COPY VERSION /tmp/VERSION
 
 # install abricate from bioconda
-RUN micromamba install -y -c bioconda -c conda-forge abricate=$(cat /tmp/VERSION) && \
+RUN micromamba install -y -n base -c bioconda -c conda-forge abricate=$(cat /tmp/VERSION) && \
 	micromamba clean -aqy
 
 # download fixed abricate-get_db
