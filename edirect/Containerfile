@@ -1,0 +1,22 @@
+FROM ubuntu:22.04
+
+ARG DEBIAN_FRONTEND="noninteractive"
+
+LABEL author="Diego Alvarez (dialvarezs@gmail.com)"
+LABEL description="Entrez Direct (https://www.ncbi.nlm.nih.gov/books/NBK179288/)"
+LABEL org.opencontainers.image.source=https://github.com/dialvarezs/containers
+
+RUN apt-get update && apt-get upgrade -y && \
+	apt-get install -y wget curl procps && \
+	rm -fr /var/lib/apt/lists/*
+
+
+# install esearch
+COPY VERSION /tmp/VERSION
+
+RUN wget https://ftp.ncbi.nlm.nih.gov/entrez/entrezdirect/install-edirect.sh -O /tmp/install-edirect.sh && \
+	bash /tmp/install-edirect.sh -version $(cat /tmp/VERSION) && \
+	mv /root/edirect /opt/edirect && \
+	chown -R root:root /opt/edirect
+
+ENV PATH=/opt/edirect:$PATH

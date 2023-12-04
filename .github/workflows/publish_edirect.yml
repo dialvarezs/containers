@@ -1,19 +1,19 @@
-name: publish CheckM2 to GitHub Container Registry
+name: publish Entrez Direct to GitHub Container Registry
 
 on:
   push:
     branches: [main]
     paths:
-      - "checkm2/*"
+      - "edirect/*"
   workflow_dispatch:
 
 jobs:
   call-workflow-passing-data:
     uses: ./.github/workflows/reusable_publish_generic.yml
     with:
-      name: checkm2
+      name: edirect
       registry: ghcr.io
-      image: ${{ github.repository }}/checkm2
-      directory: ./checkm2/
+      image: ${{ github.repository }}/edirect
+      directory: ./edirect/
     secrets:
       GH_TOKEN: ${{ secrets.GH_TOKEN }}
