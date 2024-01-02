@@ -1,4 +1,4 @@
-FROM mambaorg/micromamba:latest
+FROM mambaorg/micromamba:latest as build
 
 ARG DEBIAN_FRONTEND="noninteractive"
 
@@ -8,20 +8,31 @@ LABEL org.opencontainers.image.source=https://github.com/dialvarezs/containers
 
 USER root
 
-RUN apt-get update && apt-get upgrade -y && \
-    apt-get install -y wget procps && \
+RUN apt-get update && \
+    apt-get install -y git && \
     rm -fr /var/lib/apt/lists/*
 
 COPY VERSION /tmp/VERSION
 
-# clone CheckM2 repository and install deps
-RUN wget https://raw.githubusercontent.com/chklovski/CheckM2/$(cat /tmp/VERSION)/checkm2.yml -O /tmp/checkm2.yml && \
-	# minor fix (temporary?)
-	sed -i 's/, /,/g' /tmp/checkm2.yml && \
-	micromamba install -y -n base -f /tmp/checkm2.yml && \
+RUN git clone https://github.com/chklovski/CheckM2 /tmp/checkm2 && \
+	git -C /tmp/checkm2 checkout $(cat /tmp/VERSION)
+# install deps
+RUN micromamba install -y -n base -f /tmp/checkm2/checkm2.yml && \
 	micromamba clean -aqy
 
 # install CheckM2
-RUN /opt/conda/bin/pip install checkm2==$(cat /tmp/VERSION)
+RUN /opt/conda/bin/pip install /tmp/checkm2
+
+
+
+FROM mambaorg/micromamba:latest as final
+
+USER root
+
+RUN apt-get update && apt-get upgrade -y && \
+    apt-get install -y procps && \
+    rm -fr /var/lib/apt/lists/*
+
+COPY --from=build /opt/conda /opt/conda
 
 ENV PATH=/opt/conda/bin/:$PATH
