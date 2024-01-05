@@ -7,7 +7,7 @@ LABEL description="Entrez Direct (https://www.ncbi.nlm.nih.gov/books/NBK179288/)
 LABEL org.opencontainers.image.source=https://github.com/dialvarezs/containers
 
 RUN apt-get update && apt-get upgrade -y && \
-	apt-get install -y wget curl procps libtime-hires-perl && \
+	apt-get install -y wget curl unzip procps libtime-hires-perl && \
 	rm -fr /var/lib/apt/lists/*
 
 
