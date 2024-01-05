@@ -3,7 +3,7 @@ FROM ubuntu:22.04
 ARG DEBIAN_FRONTEND="noninteractive"
 
 LABEL author="Diego Alvarez (dialvarezs@gmail.com)"
-LABEL description="Entrez Direct (https://www.ncbi.nlm.nih.gov/books/NBK179288/)"
+LABEL description="Entrez Direct (https://www.ncbi.nlm.nih.gov/books/NBK179288/) and datasets/dataformat (https://www.ncbi.nlm.nih.gov/datasets/docs/v2/reference-docs/command-line/datasets/)"
 LABEL org.opencontainers.image.source=https://github.com/dialvarezs/containers
 
 RUN apt-get update && apt-get upgrade -y && \
@@ -13,10 +13,15 @@ RUN apt-get update && apt-get upgrade -y && \
 
 # install esearch
 COPY VERSION /tmp/VERSION
-
 RUN wget https://ftp.ncbi.nlm.nih.gov/entrez/entrezdirect/install-edirect.sh -O /tmp/install-edirect.sh && \
 	bash /tmp/install-edirect.sh -version $(cat /tmp/VERSION) && \
 	mv /root/edirect /opt/edirect && \
 	chown -R root:root /opt/edirect
+
+# install datasets and dataformat
+RUN wget https://ftp.ncbi.nlm.nih.gov/pub/datasets/command-line/v2/linux-amd64/datasets -O /usr/local/bin/datasets && \
+	chmod +x /usr/local/bin/datasets
+RUN wget https://ftp.ncbi.nlm.nih.gov/pub/datasets/command-line/v2/linux-amd64/dataformat -O /usr/local/bin/dataformat && \
+	chmod +x /usr/local/bin/dataformat
 
 ENV PATH=/opt/edirect:$PATH
