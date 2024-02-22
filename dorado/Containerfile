@@ -1,0 +1,23 @@
+FROM ubuntu:latest as dorado
+
+RUN apt-get update && apt-get install -y wget
+
+COPY VERSION /tmp/VERSION
+
+RUN wget -nv https://cdn.oxfordnanoportal.com/software/analysis/dorado-$(cat /tmp/VERSION)-linux-x64.tar.gz -O /tmp/dorado.tar.gz && \
+	tar -xzf /tmp/dorado.tar.gz --strip-components 1 -C /usr/local/
+
+
+FROM nvidia/cuda:11.8.0-runtime-ubuntu22.04
+
+ARG DEBIAN_FRONTEND="noninteractive"
+
+LABEL author="Diego Alvarez (dialvarezs@gmail.com)"
+LABEL description="dorado (https://github.com/nanoporetech/dorado)"
+LABEL org.opencontainers.image.source=https://github.com/dialvarezs/containers
+
+RUN apt-get update && apt-get upgrade -y && \
+	apt-get install -y procps && \
+	rm -fr /var/lib/apt/lists/*
+
+COPY --from=dorado /usr/local /usr/local
