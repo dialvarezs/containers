@@ -17,5 +17,5 @@ RUN \
 	&& update-alternatives --install /usr/bin/python python /usr/bin/python3 10 \
 	&& apt-get clean && rm -rf /var/lib/apt/lists/*
 
-COPY VERSION /tmp/requirements.txt
+COPY requirements.txt /tmp/requirements.txt
 RUN pip install --no-cache-dir -r /tmp/requirements.txt
