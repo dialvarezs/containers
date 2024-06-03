@@ -1,0 +1,19 @@
+name: Medaka to GitHub Container Registry
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "medaka/*"
+  workflow_dispatch:
+
+jobs:
+  call-workflow-passing-data:
+    uses: ./.github/workflows/reusable_publish_pypkg.yml
+    with:
+      package_name: medaka
+      registry: ghcr.io
+      image: ${{ github.repository }}/medaka
+      directory: ./medaka/
+    secrets:
+      GH_TOKEN: ${{ secrets.GH_TOKEN }}
