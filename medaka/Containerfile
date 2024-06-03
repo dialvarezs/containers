@@ -9,7 +9,8 @@ FROM mambaorg/micromamba:latest as conda
 
 USER root
 
-RUN micromamba install -y bcftools=1.11 samtools=1.11 htslib=1.11 minimap2=2.11 && \
+RUN micromamba install -y --prefix /opt/conda -c bioconda -c conda-forge \
+		bcftools=1.11 samtools=1.11 htslib=1.11 minimap2=2.11 && \
 	micromamba clean -aqy
 
 
