@@ -1,8 +1,11 @@
-FROM nvidia/cuda:11.2.2-cudnn8-runtime-ubuntu20.04
+FROM nvidia/cuda:11.2.2-cudnn8-runtime-ubuntu20.04 as base
 
 LABEL author="Diego Alvarez (dialvarezs@gmail.com)"
-LABEL description="Entrez Direct (https://www.ncbi.nlm.nih.gov/books/NBK179288/) and datasets/dataformat (https://www.ncbi.nlm.nih.gov/datasets/docs/v2/reference-docs/command-line/datasets/)"
+LABEL description="Medaka (https://github.com/nanoporetech/medaka)"
 LABEL org.opencontainers.image.source=https://github.com/dialvarezs/containers
+
+
+FROM base as builder
 
 ENV DEBIAN_FRONTEND=noninteractive
 
@@ -19,3 +22,8 @@ RUN \
 
 COPY requirements.txt /tmp/requirements.txt
 RUN pip install --no-cache-dir -r /tmp/requirements.txt
+
+
+FROM base as runtime
+
+COPY --from=builder /usr/local /usr/local
