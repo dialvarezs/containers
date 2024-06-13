@@ -14,7 +14,10 @@ RUN apt-get update && apt-get upgrade -y && \
 
 COPY VERSION /tmp/VERSION
 
-RUN micromamba install -y coverm=$(cat /tmp/VERSION) bwa-mem2 minimap2 && \
+RUN micromamba install -y \
+        -p /opt/conda \
+        -c bioconda -c conda-forge -c defaults \
+        coverm=$(cat /tmp/VERSION) bwa-mem2 minimap2 && \
     micromamba clean -aqy
 
 ENV PATH=/opt/conda/bin/:$PATH
