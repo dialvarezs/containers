@@ -1,0 +1,20 @@
+FROM mambaorg/micromamba:latest
+
+ARG DEBIAN_FRONTEND="noninteractive"
+
+LABEL author="Diego Alvarez (dialvarezs@gmail.com)"
+LABEL description="coverm (https://github.com/wwood/CoverM) and dependencies"
+LABEL org.opencontainers.image.source=https://github.com/dialvarezs/containers
+
+USER root
+
+RUN apt-get update && apt-get upgrade -y && \
+    apt-get install -y procps && \
+    rm -fr /var/lib/apt/lists/*
+
+COPY VERSION /tmp/VERSION
+
+RUN micromamba install -y coverm=$(cat /tmp/VERSION) bwa-mem2 minimap2 && \
+    micromamba clean -aqy
+
+ENV PATH=/opt/conda/bin/:$PATH
