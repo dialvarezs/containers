@@ -12,7 +12,6 @@ jobs:
     uses: ./.github/workflows/reusable_publish_pypkg.yml
     with:
       package_name: biopython
-      registry: ghcr.io
       image: ${{ github.repository }}/biopython
       directory: ./biopython/
     secrets:

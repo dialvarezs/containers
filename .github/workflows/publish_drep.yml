@@ -12,7 +12,6 @@ jobs:
     uses: ./.github/workflows/reusable_publish_pypkg.yml
     with:
       package_name: drep
-      registry: ghcr.io
       image: ${{ github.repository }}/drep
       directory: ./drep/
     secrets:

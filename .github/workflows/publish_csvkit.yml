@@ -12,7 +12,6 @@ jobs:
     uses: ./.github/workflows/reusable_publish_pypkg.yml
     with:
       package_name: csvkit
-      registry: ghcr.io
       image: ${{ github.repository }}/csvkit
       directory: ./csvkit/
     secrets:

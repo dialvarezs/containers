@@ -12,7 +12,6 @@ jobs:
     uses: ./.github/workflows/reusable_publish_generic.yml
     with:
       name: dorado
-      registry: ghcr.io
       image: ${{ github.repository }}/dorado
       directory: ./dorado/
     secrets:

@@ -7,8 +7,9 @@ on:
         required: true
         type: string
       registry:
-        required: true
+        required: false
         type: string
+        default: ghcr.io
       image:
         required: true
         type: string
