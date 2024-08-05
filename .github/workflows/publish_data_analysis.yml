@@ -9,11 +9,11 @@ on:
 
 jobs:
   call-workflow-passing-data:
-    uses: ./.github/workflows/reusable_publish_pypkg.yml
+    uses: ./.github/workflows/reusable_publish_generic.yml
     with:
-      package_name: scikit-learn
-      registry: ghcr.io
+      name: data-analysis
       image: ${{ github.repository }}/data-analysis
       directory: ./data-analysis/
+      date_as_version: true
     secrets:
       GH_TOKEN: ${{ secrets.GH_TOKEN }}
