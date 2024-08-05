@@ -1,0 +1,25 @@
+FROM ubuntu:latest as build
+
+RUN apt-get update && \
+	apt-get install -y unzip wget
+
+COPY VERSION /tmp/VERSION
+
+RUN export VERSION="$(cat /tmp/VERSION)" && \
+	wget "https://github.com/jqnatividad/qsv/releases/download/${VERSION}/qsv-${VERSION}-x86_64-unknown-linux-gnu.zip" \
+		-O /tmp/qsv.zip && \
+	unzip /tmp/qsv.zip -d /tmp/qsv
+
+
+FROM ubuntu:latest
+
+ARG DEBIAN_FRONTEND="noninteractive"
+
+LABEL author="Diego Alvarez (dialvarezs@gmail.com)"
+LABEL description="qsv (https://github.com/jqnatividad/qsv)"
+LABEL org.opencontainers.image.source=https://github.com/dialvarezs/containers
+
+RUN apt-get update && apt-get upgrade -y && \
+	rm -fr /var/lib/apt/lists/*
+
+COPY --from=build /tmp/qsv/qsv /usr/local/bin/qsv
