@@ -1,11 +1,5 @@
 FROM mambaorg/micromamba:latest as build
 
-ARG DEBIAN_FRONTEND="noninteractive"
-
-LABEL author="Diego Alvarez (dialvarezs@gmail.com)"
-LABEL description="CheckM2 (https://github.com/chklovski/CheckM2)"
-LABEL org.opencontainers.image.source=https://github.com/dialvarezs/containers
-
 USER root
 
 RUN apt-get update && \
@@ -15,17 +9,22 @@ RUN apt-get update && \
 COPY VERSION /tmp/VERSION
 
 RUN git clone https://github.com/chklovski/CheckM2 /tmp/checkm2 && \
-	git -C /tmp/checkm2 checkout $(cat /tmp/VERSION)
+    git -C /tmp/checkm2 checkout $(cat /tmp/VERSION)
 # install deps
 RUN micromamba install -y -n base -f /tmp/checkm2/checkm2.yml && \
-	micromamba clean -aqy
+    micromamba clean -aqy
 
 # install CheckM2
 RUN /opt/conda/bin/pip install /tmp/checkm2
 
 
-
 FROM mambaorg/micromamba:latest as final
+
+ARG DEBIAN_FRONTEND="noninteractive"
+
+LABEL author                          = "Diego Alvarez (dialvarezs@gmail.com)"
+LABEL description                     = "CheckM2 (https://github.com/chklovski/CheckM2)"
+LABEL org.opencontainers.image.source = "https://github.com/dialvarezs/containers"
 
 USER root
 

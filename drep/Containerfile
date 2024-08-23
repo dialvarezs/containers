@@ -2,9 +2,9 @@ FROM mambaorg/micromamba:latest
 
 ARG DEBIAN_FRONTEND="noninteractive"
 
-LABEL author="Diego Alvarez (dialvarezs@gmail.com)"
-LABEL description="dRep (https://github.com/MrOlm/drep) and dependencies"
-LABEL org.opencontainers.image.source=https://github.com/dialvarezs/containers
+LABEL author                          = "Diego Alvarez (dialvarezs@gmail.com)"
+LABEL description                     = "dRep (https://github.com/MrOlm/drep) and dependencies"
+LABEL org.opencontainers.image.source = "https://github.com/dialvarezs/containers"
 
 USER root
 

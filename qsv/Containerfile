@@ -1,4 +1,4 @@
-FROM ubuntu:latest as build
+FROM ubuntu:24.04 as build
 
 RUN apt-get update && \
 	apt-get install -y unzip wget
@@ -10,14 +10,16 @@ RUN export VERSION="$(cat /tmp/VERSION)" && \
 		-O /tmp/qsv.zip && \
 	unzip /tmp/qsv.zip -d /tmp/qsv
 
+RUN ls /tmp/qsv
 
-FROM ubuntu:latest
+
+FROM ubuntu:24.04
 
 ARG DEBIAN_FRONTEND="noninteractive"
 
-LABEL author="Diego Alvarez (dialvarezs@gmail.com)"
-LABEL description="qsv (https://github.com/jqnatividad/qsv)"
-LABEL org.opencontainers.image.source=https://github.com/dialvarezs/containers
+LABEL author                          = "Diego Alvarez (dialvarezs@gmail.com)"
+LABEL description                     = "qsv (https://github.com/jqnatividad/qsv)"
+LABEL org.opencontainers.image.source = "https://github.com/dialvarezs/containers"
 
 RUN apt-get update && apt-get upgrade -y && \
 	rm -fr /var/lib/apt/lists/*

@@ -2,10 +2,10 @@ FROM antismash/standalone-lite:7.1.0
 
 ARG DEBIAN_FRONTEND="noninteractive"
 
-LABEL author="Diego Alvarez (dialvarezs@gmail.com)"
-LABEL description="antiSMASH lite plus procps (for nextflow compatibility)"
-LABEL org.opencontainers.image.source=https://github.com/dialvarezs/containers
+LABEL author                          = "Diego Alvarez (dialvarezs@gmail.com)"
+LABEL description                     = "antiSMASH lite plus procps (for nextflow compatibility)"
+LABEL org.opencontainers.image.source = "https://github.com/dialvarezs/containers"
 
 RUN apt-get update && apt-get upgrade -y && \
-	apt-get install -y procps && \
-	rm -fr /var/lib/apt/lists/*
+    apt-get install -y procps && \
+    rm -fr /var/lib/apt/lists/*

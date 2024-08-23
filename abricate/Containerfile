@@ -2,9 +2,9 @@ FROM mambaorg/micromamba:latest
 
 ARG DEBIAN_FRONTEND="noninteractive"
 
-LABEL author="Diego Alvarez (dialvarezs@gmail.com)"
-LABEL description="Abricate (https://github.com/tseemann/abricate) with fixed Megares download"
-LABEL org.opencontainers.image.source=https://github.com/dialvarezs/containers
+LABEL author                          = "Diego Alvarez (dialvarezs@gmail.com)"
+LABEL description                     = "Abricate (https://github.com/tseemann/abricate) with fixed Megares download"
+LABEL org.opencontainers.image.source = "https://github.com/dialvarezs/containers"
 
 USER root
 
@@ -16,11 +16,11 @@ COPY VERSION /tmp/VERSION
 
 # install abricate from bioconda
 RUN micromamba install -y -n base -c bioconda -c conda-forge abricate=$(cat /tmp/VERSION) && \
-	micromamba clean -aqy
+    micromamba clean -aqy
 
 # download fixed abricate-get_db
 RUN wget https://raw.githubusercontent.com/dialvarezs/abricate/master/bin/abricate-get_db -O /opt/conda/bin/abricate-get_db && \
-	chmod +x /opt/conda/bin/abricate-get_db
+    chmod +x /opt/conda/bin/abricate-get_db
 
 
 ENV PATH=/opt/conda/bin/:$PATH

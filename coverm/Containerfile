@@ -2,9 +2,9 @@ FROM mambaorg/micromamba:latest
 
 ARG DEBIAN_FRONTEND="noninteractive"
 
-LABEL author="Diego Alvarez (dialvarezs@gmail.com)"
-LABEL description="coverm (https://github.com/wwood/CoverM) and dependencies"
-LABEL org.opencontainers.image.source=https://github.com/dialvarezs/containers
+LABEL author                          = "Diego Alvarez (dialvarezs@gmail.com)"
+LABEL description                     = "coverm (https://github.com/wwood/CoverM) and dependencies"
+LABEL org.opencontainers.image.source = "https://github.com/dialvarezs/containers"
 
 USER root
 
@@ -15,9 +15,9 @@ RUN apt-get update && apt-get upgrade -y && \
 COPY VERSION /tmp/VERSION
 
 RUN micromamba install -y \
-        -p /opt/conda \
-        -c bioconda -c conda-forge -c defaults \
-        coverm=$(cat /tmp/VERSION) bwa-mem2 minimap2 && \
+    -p /opt/conda \
+    -c bioconda -c conda-forge -c defaults \
+    coverm=$(cat /tmp/VERSION) bwa-mem2 minimap2 && \
     micromamba clean -aqy
 
 ENV PATH=/opt/conda/bin/:$PATH
