@@ -17,9 +17,9 @@ FROM ubuntu:24.04
 
 ARG DEBIAN_FRONTEND="noninteractive"
 
-LABEL author                          = "Diego Alvarez (dialvarezs@gmail.com)"
-LABEL description                     = "qsv (https://github.com/jqnatividad/qsv)"
-LABEL org.opencontainers.image.source = "https://github.com/dialvarezs/containers"
+LABEL author="Diego Alvarez (dialvarezs@gmail.com)"
+LABEL description="qsv (https://github.com/jqnatividad/qsv)"
+LABEL org.opencontainers.image.source="https://github.com/dialvarezs/containers"
 
 RUN apt-get update && apt-get upgrade -y && \
 	rm -fr /var/lib/apt/lists/*

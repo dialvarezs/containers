@@ -22,9 +22,9 @@ FROM mambaorg/micromamba:latest as final
 
 ARG DEBIAN_FRONTEND="noninteractive"
 
-LABEL author                          = "Diego Alvarez (dialvarezs@gmail.com)"
-LABEL description                     = "CheckM2 (https://github.com/chklovski/CheckM2)"
-LABEL org.opencontainers.image.source = "https://github.com/dialvarezs/containers"
+LABEL author="Diego Alvarez (dialvarezs@gmail.com)"
+LABEL description="CheckM2 (https://github.com/chklovski/CheckM2)"
+LABEL org.opencontainers.image.source="https://github.com/dialvarezs/containers"
 
 USER root
 

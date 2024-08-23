@@ -32,9 +32,9 @@ FROM base as runtime
 
 ARG DEBIAN_FRONTEND="noninteractive"
 
-LABEL author                          = "Diego Alvarez (dialvarezs@gmail.com)"
-LABEL description                     = "Medaka (https://github.com/nanoporetech/medaka)"
-LABEL org.opencontainers.image.source = "https://github.com/dialvarezs/containers"
+LABEL author="Diego Alvarez (dialvarezs@gmail.com)"
+LABEL description="Medaka (https://github.com/nanoporetech/medaka)"
+LABEL org.opencontainers.image.source="https://github.com/dialvarezs/containers"
 
 RUN \
     apt-get update && \

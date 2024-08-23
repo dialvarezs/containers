@@ -2,9 +2,9 @@ FROM ubuntu:24.04
 
 ARG DEBIAN_FRONTEND="noninteractive"
 
-LABEL author                          = "Diego Alvarez (dialvarezs@gmail.com)"
-LABEL description                     = "Entrez Direct (https://www.ncbi.nlm.nih.gov/books/NBK179288/) and datasets/dataformat (https://www.ncbi.nlm.nih.gov/datasets/docs/v2/reference-docs/command-line/datasets/)"
-LABEL org.opencontainers.image.source = "https://github.com/dialvarezs/containers"
+LABEL author="Diego Alvarez (dialvarezs@gmail.com)"
+LABEL description="Entrez Direct (https://www.ncbi.nlm.nih.gov/books/NBK179288/) and datasets/dataformat (https://www.ncbi.nlm.nih.gov/datasets/docs/v2/reference-docs/command-line/datasets/)"
+LABEL org.opencontainers.image.source="https://github.com/dialvarezs/containers"
 
 RUN apt-get update && apt-get upgrade -y && \
     apt-get install -y wget curl unzip procps libtime-hires-perl && \

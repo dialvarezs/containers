@@ -2,9 +2,9 @@ FROM python:3.12-slim
 
 ARG DEBIAN_FRONTEND="noninteractive"
 
-LABEL author                          = "Diego Alvarez (dialvarezs@gmail.com)"
-LABEL description                     = "biopython (https://github.com/biopython/biopython)"
-LABEL org.opencontainers.image.source = "https://github.com/dialvarezs/containers"
+LABEL author="Diego Alvarez (dialvarezs@gmail.com)"
+LABEL description="biopython (https://github.com/biopython/biopython)"
+LABEL org.opencontainers.image.source="https://github.com/dialvarezs/containers"
 
 RUN apt-get update && apt-get upgrade -y && \
     apt-get install -y procps && \
