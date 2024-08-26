@@ -19,4 +19,4 @@ RUN --mount=from=ghcr.io/astral-sh/uv:latest,source=/uv,target=/bin/uv \
     uv pip install --no-cache -r /tmp/requirements.txt
 
 # "patch" nanoq module ot use bar chart instead of line chart
-COPY nanoq.py /venv/lib/python3.12/site-packages/multiqc/modules/nanoq/nanoq.py
+COPY nanoq.py /venv/lib/python3.11/site-packages/multiqc/modules/nanoq/nanoq.py
