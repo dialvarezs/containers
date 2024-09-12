@@ -1,11 +1,11 @@
-FROM nvidia/cuda:11.2.2-cudnn8-runtime-ubuntu20.04 as base
+FROM nvidia/cuda:12.1.0-cudnn8-runtime-ubuntu22.04 as base
 
 FROM mambaorg/micromamba:latest as conda
 
 USER root
 
 RUN micromamba install -y --prefix /opt/conda -c bioconda -c conda-forge \
-    bcftools=1.11 samtools=1.11 htslib=1.11 minimap2=2.11 && \
+    bcftools=1.14 samtools=1.14 htslib=1.14 minimap2=2.17 && \
     micromamba clean -aqy
 
 
