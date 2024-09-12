@@ -25,6 +25,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Delete unnecessary tools folder
+        run: rm -rf /opt/hostedtoolcache
+
       - name: Check out repository
         uses: actions/checkout@v4
 
