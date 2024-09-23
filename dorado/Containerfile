@@ -8,7 +8,7 @@ RUN wget -nv https://cdn.oxfordnanoportal.com/software/analysis/dorado-$(cat /tm
     tar -xzf /tmp/dorado.tar.gz --strip-components 1 -C /usr/local/
 
 
-FROM nvidia/cuda:11.8.0-runtime-ubuntu22.04
+FROM nvidia/cuda:12.1.1-runtime-ubuntu22.04
 
 ARG DEBIAN_FRONTEND="noninteractive"
 
