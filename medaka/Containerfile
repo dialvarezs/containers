@@ -1,6 +1,6 @@
-FROM nvidia/cuda:12.1.1-cudnn8-runtime-ubuntu22.04 as base
+FROM nvidia/cuda:12.1.1-cudnn8-runtime-ubuntu22.04 AS base
 
-FROM mambaorg/micromamba:latest as conda
+FROM mambaorg/micromamba:latest AS conda
 
 USER root
 
@@ -9,7 +9,7 @@ RUN micromamba install -y --prefix /opt/conda -c bioconda -c conda-forge \
     micromamba clean -aqy
 
 
-FROM base as builder
+FROM base AS builder
 
 ARG DEBIAN_FRONTEND="noninteractive"
 
@@ -31,7 +31,7 @@ RUN --mount=from=ghcr.io/astral-sh/uv:latest,source=/uv,target=/bin/uv \
     uv pip install --no-cache -r /tmp/requirements.txt
 
 
-FROM base as runtime
+FROM base AS runtime
 
 ARG DEBIAN_FRONTEND="noninteractive"
 
