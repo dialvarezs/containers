@@ -7,7 +7,7 @@ LABEL description="Miscellaneous utilities (git, pigz, rapidgzip, curl, wget, wg
 LABEL org.opencontainers.image.source="https://github.com/dialvarezs/containers"
 
 RUN apt-get update && apt-get upgrade -y && \
-    apt-get install -y procps git pigz curl wget wget2 aria2 ripgrep python3-pip && \
+    apt-get install -y procps git pigz curl wget wget2 aria2 ripgrep python3-full python3-pip && \
     rm -fr /var/lib/apt/lists/*
 
-RUN pip install --no-cache-dir rapidgzip
+RUN pip install --no-cache-dir --break-system-packages rapidgzip
