@@ -1,4 +1,4 @@
-FROM nvidia/cuda:12.1.1-cudnn8-runtime-ubuntu22.04 AS base
+FROM nvidia/cuda:12.8.1-runtime-ubuntu24.04 AS base
 
 FROM mambaorg/micromamba:latest AS conda
 
