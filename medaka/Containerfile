@@ -51,4 +51,4 @@ RUN update-alternatives --install /usr/bin/python python /usr/bin/python3 10
 COPY --from=builder /venv /venv
 COPY --from=conda /opt/conda /opt/conda
 
-ENV PATH=/venv:/opt/conda/bin/:$PATH
+ENV PATH=/venv/bin:/opt/conda/bin:$PATH
